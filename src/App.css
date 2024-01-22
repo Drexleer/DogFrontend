@@ -1,0 +1,15 @@
+/* En tu archivo CSS */
+html,
+body,
+#root {
+    background-image: url("https://browsecat.art/sites/default/files/cartoon-dog-wallpapers-84116-1258816-4048046.png");
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.App {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
