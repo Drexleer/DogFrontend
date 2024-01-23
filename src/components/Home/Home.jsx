@@ -42,12 +42,19 @@ export default function Home() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllDogs()).then(() => {
-      setShowLoading(false);
-    });
-    dispatch(getTemperaments());
-    setShowLoading(false);
-  }, []);
+    const fetchData = async () => {
+      try {
+        await dispatch(getAllDogs());
+        await dispatch(getTemperaments());
+        setShowLoading(false);
+      } catch (error) {
+        setShowLoading(false);
+        setError(true);
+        console.log('Error al obtener los datos', error);
+      }
+    };
+    fetchData();
+  }, [dispatch]);
 
   //* Paginado
   const [currentPage, setCurrentPage] = useState(1);
@@ -128,7 +135,7 @@ export default function Home() {
 
   return (
     <div>
-      {/* {showLoading ? <Loading /> : null} */}
+      {showLoading ? <Loading /> : null}
       {!showLoading && !error ? (
         breedsFiltered.length ? (
           <DivContainer>
